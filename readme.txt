@@ -1,0 +1,1 @@
+Delphi String ---> C++ string
