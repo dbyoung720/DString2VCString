@@ -30,19 +30,19 @@ type
     R4: DWORD;         // 定值 = $0000002F
   end;
 
+procedure TestVCString(strValue: VCString); stdcall; external 'VC02.dll';
+
 { Delphi String 转换为 C++ String }
 function DelphiString2VCString(strFileName: string): VCString;
 var
   vcs: AnsiString;
 begin
-  vcs := AnsiString(strFileName);         // 宽字节转换为短字节
-  FillChar(Result, SizeOf(VCString), #0); // 置空
-  Result.strMem := @vcs[1];               // 字符串指针
-  Result.len    := Length(vcs);           // 字符串长度
-  Result.R4     := $0000002F;             // 定值
+  FillChar(Result, SizeOf(VCString), #0);   // 置空
+  vcs           := AnsiString(strFileName); // 宽字节转换为短字节
+  Result.strMem := @vcs[1];                 // 字符串指针
+  Result.len    := Length(vcs);             // 字符串长度
+  Result.R4     := $0000002F;               // 定值
 end;
-
-procedure TestVCString(strValue: VCString); stdcall; external 'VC02.dll';
 
 procedure TForm1.FormCreate(Sender: TObject);
 var
