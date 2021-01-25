@@ -30,8 +30,6 @@ type
     R4: DWORD;         // 定值 = $0000002F
   end;
 
-procedure TestVCString(strValue: VCString); stdcall; external 'VC02.dll';
-
 { Delphi String 转换为 C++ String }
 function DelphiString2VCString(strFileName: string): VCString;
 var
@@ -44,12 +42,14 @@ begin
   Result.R4     := $0000002F;               // 定值
 end;
 
+procedure TestVCString(strValue: VCString); stdcall; external 'VC02.dll';
+
 procedure TForm1.FormCreate(Sender: TObject);
 var
-  AAA: VCString;
+  vcs: VCString;
 begin
-  AAA := DelphiString2VCString('F:\Github\dbImage\bin\Win32\test.jpg');
-  TestVCString(AAA);
+  vcs := DelphiString2VCString('F:\Github\dbImage\bin\Win32\test.jpg');
+  TestVCString(vcs);
 end;
 
 end.
